@@ -46,7 +46,7 @@ void loop(){
   // ถ้าขึ้น Hard resetting แปลว่าโหลดลงบอร์ดสำเร็จ
 
   //ทำให้กะพริบ เพิ่ม
-  delay(200); // ดีเลย์ 200 ms	
+  delay(200); // ดีเลย์ 200 ms    
   digitalWrite(5,HIGH);
   delay(200);
 }
@@ -71,8 +71,6 @@ digitalRead(pin_number) - อ่านค่าจาก pin ที่ต้อ�
 Button
 
 2 ขาร่าง กับ 2 ขาบนเชื่อมกัน ด้านบนกับด้านล่างเชื่อมถึงกันเมื่อกดปุ่ม
-
-
 
 ```
 void setup(){
@@ -154,8 +152,6 @@ LDR - Light Dependent Resistor (Module , แบบเปล่าๆ ต้อ�
       delay(100);
   }
   ```
-  
-  
 
 #### Exerise : Auto LED
 
@@ -222,6 +218,7 @@ void loop(){
   void setup(){
       pinMode(led,OUTPUT);
       ledcSetup(ch, freq,res);
+      ledAttachPin(led, ch);
       ledcWrite(ch,0);
   }
   
@@ -232,5 +229,3 @@ void loop(){
       }
   }
   ```
-  
-  
