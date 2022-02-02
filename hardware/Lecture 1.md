@@ -2,7 +2,7 @@
 
 ใช้ Arduino (C,C++)
 
-ฺBoard : LOLIN D32 PRO
+Board : LOLIN D32 PRO
 
 ## Basic IO
 
@@ -153,7 +153,7 @@ LDR - Light Dependent Resistor (Module , แบบเปล่าๆ ต้อ�
   }
   ```
 
-#### Exerise : Auto LED
+#### Excerise : Auto LED
 
 ใช้ LDR กับ Internal LED
 
