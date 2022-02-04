@@ -19,7 +19,7 @@ Entry Point -> Setup -> Loop (Infinite)
 ให้หลอดไฟ 2 หลอดกะพริบด้วยความเร็วที่ต่างกัน
 
 ```
-#define LED-R 4
+#define LED_R 4
 #define LED_Y 5
 
 unsigned long r_ts, y_ts;
@@ -38,7 +38,7 @@ void loop(){
     }
 
     if(millis() - y_ts > 2000){
-            digitalWrite(LED_R, !digitalRead(LED_R));
+            digitalWrite(LED_Y, !digitalRead(LED_Y));
             y_ts = millis();    
     }
 }
@@ -87,7 +87,7 @@ vTaskPrioritySet(Task_Handle,priority)
 void setup(){
     pinMode(LED_R, OUTPUT);
     xTaskCreatePinnedToCore(
-        Task A,
+        TaskA,
         "Task A",
         1024    ,
         NULL,
@@ -148,7 +148,7 @@ void TaskA(void *parameter){
 
 void TaskB(void *parameter){
     while(1){
-        digitalWrite(LED_R, !digitalRead(LED_Y));
+        digitalWrite(LED_Y, !digitalRead(LED_Y));
         vTaskDelay(3000/portTICK_PERIOD_MS);
     }
 }
@@ -245,44 +245,45 @@ vTaskSuspend() -> Suspended -> vTaskResume() -> Ready
 TaskHandle_t blinkTaskHandle = NULL;
 
 void setup(){
-    Serial.begin(115200);
+    Serial.begin(115200);
 
     pinMode(LED_R, OUTPUT);
-    digitalWrite(LED_R, LOW);
+    digitalWrite(LED_R, LOW);
 }
 
 void loop(){
     while(!Serial.available()){
-        vTaskDelay(1/portTICK_PERIOD_MS);
-    }
-    int interval = Serial.parseInt();
-    if(interval > 0){
-        Serial.println(interval);
-        startBlinkTask(interval);
-    }
+        vTaskDelay(1/portTICK_PERIOD_MS);
+    }
+    int interval = Serial.parseInt();
+    if(interval > 0){
+        Serial.println(interval);
+        startBlinkTask(interval);
+    }
 }
 
-void startBlickTask(int interval){
-    if(blinkTaskHandle){
-        vTaskDelete(blinkTaskHandle);
-    }
+void startBlinkTask(int interval){
+    if(blinkTaskHandle){
+        vTaskDelete(blinkTaskHandle);
+    }
     xTaskCreatePinnedToCore(
-        blinkLEDTask,
-        "Blink LED",
-        1024,
-        (void *)interval,
-        1,
-        &blinkTaskHandle,
-        1
-    );
+        blinkLEDTask,
+        "Blink LED",
+        1024,
+        (void *)interval,
+        1,
+        &blinkTaskHandle,
+        1
+    );
 }
 
-void binkLEDTask(void* parameter){
-    int interval = (int) parameter;
-    while(1){
-        digitalWrite(LED_R, !(digitalRead(LED_R)));
-        vTaskDelay(interval/portTICK_PERIOD_MS);
-    }    
+void blinkLEDTask(void* parameter){
+    int interval = (int) parameter;
+    digitalWrite(LED_R,LOW);
+    while(1){
+        digitalWrite(LED_R, !(digitalRead(LED_R)));
+        vTaskDelay(interval/portTICK_PERIOD_MS);
+    }    
 
 }
 ```
