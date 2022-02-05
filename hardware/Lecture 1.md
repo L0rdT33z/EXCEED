@@ -218,7 +218,7 @@ void loop(){
   void setup(){
       pinMode(led,OUTPUT);
       ledcSetup(ch, freq,res);
-      ledAttachPin(led, ch);
+      ledcAttachPin(led, ch);
       ledcWrite(ch,0);
   }
   
