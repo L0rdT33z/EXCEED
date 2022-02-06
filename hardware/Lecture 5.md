@@ -36,7 +36,7 @@ void debounce(){
 }
 
 void setup(){
-  pinMode(sw,INPUT_PULLUP);
+  pinMode(sw,INPUT);
   Serial.begin(115200);
   delay(2000);
   //
